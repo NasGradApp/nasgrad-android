@@ -13,7 +13,7 @@ import io.reactivex.schedulers.Schedulers
 
 class SplashScreenActivity : AppCompatActivity() {
 
-    val client by lazy {
+    private val client by lazy {
         ApiClient.create()
     }
     var disposable1: Disposable? = null
@@ -25,7 +25,6 @@ class SplashScreenActivity : AppCompatActivity() {
         intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
 
-
         disposable1 = client.getTypes()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -33,7 +32,7 @@ class SplashScreenActivity : AppCompatActivity() {
                 { result -> saveTypesToSharedPreferences(result)
                     finish()
                 },
-                { error -> finish() }
+                { finish() }
             )
 
         disposable2 = client.getCategories()
@@ -43,14 +42,13 @@ class SplashScreenActivity : AppCompatActivity() {
                 { result -> saveCategoriesToSharedPreferences(result)
                     finish()
                 },
-                { error -> Log.e("sonja categories", error.message) }
+                { }
             )
     }
 
     private fun saveTypesToSharedPreferences(issueTypes: List<IssueType>) {
         val map = Helper.issueTypes
         for (type in issueTypes) {
-            Log.e("sonja types", "${type.name}")
             map[type.id] = type
         }
     }
@@ -58,7 +56,6 @@ class SplashScreenActivity : AppCompatActivity() {
     private fun saveCategoriesToSharedPreferences(issueCategories: List<IssueCategory>) {
         val map = Helper.issueCategories
         for (category in issueCategories) {
-            Log.e("sonja categories", "${category.name}")
             map[category.id] = category
         }
     }
@@ -66,5 +63,6 @@ class SplashScreenActivity : AppCompatActivity() {
     override fun onDestroy() {
         super.onDestroy()
         disposable1?.dispose()
+        disposable2?.dispose()
     }
 }

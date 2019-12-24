@@ -4,11 +4,11 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.preference.PreferenceManager
 
-class SharedPreferencesHelper (private val context: Context) {
+class SharedPreferencesHelper(context: Context) {
 
     private val preferences: SharedPreferences = PreferenceManager.getDefaultSharedPreferences(context)
 
-    fun getStringValue(key: String, defaultValue: String): String {
+    fun getStringValue(key: String, defaultValue: String): String? {
         return preferences.getString(key, defaultValue)
     }
 

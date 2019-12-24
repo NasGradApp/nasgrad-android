@@ -5,33 +5,33 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.nasgrad.DetailActivity">
-	
-	<android.support.v7.widget.Toolbar
-		android:id="@+id/detailActivityToolbar"
-		android:layout_width="match_parent"
-		android:layout_height="wrap_content"
-		android:background="?attr/colorPrimary"
-		android:elevation="4dp"
-		style="@style/HeaderBar"
-		android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-		app:layout_constraintEnd_toEndOf="parent"
-		app:layout_constraintStart_toStartOf="parent"
-		app:layout_constraintTop_toTopOf="parent"
-		app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
-		
-		<ImageButton
-			android:id="@+id/share_btn"
-			android:layout_width = "wrap_content"
-			android:layout_height = "match_parent"
-			android:layout_marginEnd="16dp"
-			android:src="@drawable/ic_share"
-			android:background="@android:color/transparent"
-			android:layout_gravity="end" />
-		
-	</android.support.v7.widget.Toolbar>
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/detailActivityToolbar"
+        style="@style/HeaderBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+
+        <ImageButton
+            android:id="@+id/share_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="end"
+            android:layout_marginEnd="16dp"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_share" />
+
+    </android.support.v7.widget.Toolbar>
 
     <TextView
-        android:id="@+id/titleDetailsLabel"
+        android:id="@+id/titleDetails"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -39,11 +39,11 @@
         android:layout_marginEnd="24dp"
         android:ellipsize="end"
         android:maxLines="2"
-        android:text="@string/default_issue_title"
         android:textSize="22sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/detailActivityToolbar" />
+        app:layout_constraintTop_toBottomOf="@id/detailActivityToolbar"
+        tools:text="Oboreno stablo u Laze Teleckog" />
 
     <ScrollView
         android:id="@+id/scrollViewDetailsActivity"
@@ -54,7 +54,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/titleDetailsLabel">
+        app:layout_constraintTop_toBottomOf="@+id/titleDetails">
 
         <android.support.constraint.ConstraintLayout
             android:id="@+id/detailsActivityWrapper"
@@ -68,67 +68,68 @@
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="32dp"
-	            android:scaleType="fitXY"
                 android:background="@drawable/img_shape"
+                android:contentDescription="@null"
+                android:scaleType="fitXY"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-            
-            <TextView
-	            android:id = "@+id/typeFromPredefinedList"
-	            android:layout_width = "0dp"
-	            android:layout_height = "wrap_content"
-	            android:layout_marginStart = "24dp"
-	            android:layout_marginTop = "24dp"
-	            android:layout_marginEnd = "24dp"
-	            android:ellipsize = "end"
-	            android:singleLine = "true"
-	            android:text = "@string/tip"
-	            android:textColor = "@color/colorTextPrimary"
-	            android:textSize = "18sp"
-	            app:layout_constraintEnd_toEndOf = "parent"
-	            app:layout_constraintStart_toStartOf = "parent"
-	            app:layout_constraintTop_toBottomOf = "@+id/issuePicture" />
 
             <TextView
-                android:id = "@+id/addressLabel"
-                android:layout_width = "match_parent"
-                android:layout_height = "wrap_content"
-                android:layout_marginStart = "24dp"
-                android:layout_marginTop = "16dp"
-                android:layout_marginEnd = "24dp"
-                android:text = "@string/adresa"
-                android:textColor = "@color/colorTextPrimary"
-                android:textSize = "18sp"
-	            android:visibility="invisible"
-                app:layout_constraintEnd_toEndOf = "parent"
-                app:layout_constraintStart_toStartOf = "parent"
-                app:layout_constraintTop_toBottomOf = "@+id/typeFromPredefinedList" />
-            
+                android:id="@+id/typeFromPredefinedList"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="24dp"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:textColor="@color/colorTextPrimary"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/issuePicture" />
+
             <TextView
-                android:id = "@+id/issueDetailDescTextView"
-                android:layout_width = "0dp"
-                android:layout_height = "300dp"
-                android:layout_marginStart = "24dp"
-                android:layout_marginTop = "16dp"
-                android:layout_marginEnd = "24dp"
-                android:layout_marginBottom = "64dp"
-                android:text = "@string/lorem_ipsum_paragraph"
-                android:textSize = "18sp"
-                app:layout_constraintBottom_toBottomOf = "parent"
-                app:layout_constraintEnd_toEndOf = "parent"
-                app:layout_constraintStart_toStartOf = "parent"
-                app:layout_constraintTop_toBottomOf = "@+id/addressLabel"/>
+                android:id="@+id/issueAddress"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="24dp"
+                android:ellipsize="end"
+                android:singleLine="true"
+                android:textColor="@color/colorTextPrimary"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/typeFromPredefinedList" />
+
+            <TextView
+                android:id="@+id/issueDescription"
+                android:layout_width="0dp"
+                android:layout_height="300dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginBottom="64dp"
+                android:text="@string/lorem_ipsum_paragraph"
+                android:textSize="18sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/issueAddress" />
 
             <ImageButton
                 android:id="@+id/changeToPreviousImage"
-                android:visibility="invisible"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
-                android:src="@drawable/ic_chevron_left"
                 android:background="@android:color/transparent"
+                android:contentDescription="@null"
+                android:src="@drawable/ic_chevron_left"
+                android:visibility="invisible"
                 app:layout_constraintBottom_toBottomOf="@+id/issuePicture"
                 app:layout_constraintEnd_toStartOf="@+id/issuePicture"
                 app:layout_constraintStart_toStartOf="parent"
@@ -136,18 +137,18 @@
 
             <ImageButton
                 android:id="@+id/changeNextImage"
-                android:visibility="invisible"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginEnd="8dp"
-                android:src="@drawable/ic_chevron_right"
                 android:background="@android:color/transparent"
+                android:src="@drawable/ic_chevron_right"
+                android:visibility="invisible"
                 app:layout_constraintBottom_toBottomOf="@+id/issuePicture"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/issuePicture"
                 app:layout_constraintTop_toTopOf="@+id/issuePicture" />
-            
+
         </android.support.constraint.ConstraintLayout>
     </ScrollView>
 
@@ -158,13 +159,13 @@
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="16dp"
-        android:padding="4dp"
         android:background="@drawable/button_shape"
-        android:text="Prijavi Problem"
-	    android:textSize="18sp"
+        android:padding="4dp"
+        android:text="@string/report_issue"
         android:textColor="@android:color/white"
+        android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
-	
-	</android.support.constraint.ConstraintLayout>
+
+</android.support.constraint.ConstraintLayout>

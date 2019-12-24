@@ -10,10 +10,8 @@ import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.view.View.OnClickListener
 import android.widget.Toast
-import com.google.android.gms.maps.GoogleMap
 import com.nasgrad.MainActivity.Companion.ITEM_ID
 import com.nasgrad.api.model.Issue
-import com.nasgrad.issue.CreateIssueActivity
 import com.nasgrad.nasGradApp.R
 import com.nasgrad.utils.Helper
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -26,7 +24,7 @@ import java.net.URLEncoder
 
 class DetailActivity : AppCompatActivity(), OnClickListener {
 
-    lateinit var displayedIssue: Issue
+    private lateinit var displayedIssue: Issue
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -47,8 +45,7 @@ class DetailActivity : AppCompatActivity(), OnClickListener {
     }
 
     override fun onClick(view: View) {
-        val viewId = view.id
-        when (viewId) {
+        when (view.id) {
             reportIssue.id -> openEmailClint()
             share_btn.id -> shareTwitter(resources.getString(R.string.tweetText, displayedIssue.title, displayedIssue.id))
         }
@@ -59,19 +56,16 @@ class DetailActivity : AppCompatActivity(), OnClickListener {
         return true
     }
 
-    private var map: GoogleMap? = null
-
     private fun shareTwitter(message: String) {
         val tweetIntent = Intent(Intent.ACTION_SEND)
         tweetIntent.putExtra(Intent.EXTRA_TEXT, message)
-        tweetIntent.type = "text/plain"
+        tweetIntent.type = resources.getString(R.string.tweet_text_type)
 
-        val packManager = packageManager
-        val resolvedInfoList = packManager.queryIntentActivities(tweetIntent, PackageManager.MATCH_DEFAULT_ONLY)
+        val resolvedInfoList = packageManager.queryIntentActivities(tweetIntent, PackageManager.MATCH_DEFAULT_ONLY)
 
         var resolved = false
         for (resolveInfo in resolvedInfoList) {
-            if (resolveInfo.activityInfo.packageName.startsWith("com.twitter.android")) {
+            if (resolveInfo.activityInfo.packageName.startsWith(resources.getString(R.string.twitter_app_package_name))) {
                 tweetIntent.setClassName(
                     resolveInfo.activityInfo.packageName,
                     resolveInfo.activityInfo.name
@@ -83,12 +77,12 @@ class DetailActivity : AppCompatActivity(), OnClickListener {
         if (resolved) {
             startActivity(tweetIntent)
         } else {
-            val i = Intent()
-            i.putExtra(Intent.EXTRA_TEXT, message)
-            i.action = Intent.ACTION_VIEW
-            i.data = Uri.parse("https://twitter.com/intent/tweet?text=" + urlEncode(message))
-            startActivity(i)
-            Toast.makeText(this, "Twitter app isn't found", Toast.LENGTH_LONG).show()
+            val intent = Intent()
+            intent.putExtra(Intent.EXTRA_TEXT, message)
+            intent.action = Intent.ACTION_VIEW
+            intent.data = Uri.parse(resources.getString(R.string.send_tweet_base_url) + urlEncode(message))
+            startActivity(intent)
+            Toast.makeText(this, resources.getString(R.string.twitter_app_not_found), Toast.LENGTH_LONG).show()
         }
     }
 
@@ -108,13 +102,12 @@ class DetailActivity : AppCompatActivity(), OnClickListener {
     }
 
     private fun openEmailClint() {
-        val recipient = resources.getString(R.string.email)
-        val cc = "nas-grad-app@gmail.com"
+        val recipient = resources.getString(R.string.email_address)
+        val cc = resources.getString(R.string.nas_grad_email_address)
         val subject = Uri.encode(String.format(getString(R.string.email_subject), displayedIssue.title))
         val body = Uri.encode(String.format(getString(R.string.email_body), displayedIssue.title, displayedIssue.id))
         val email = String.format(getString(R.string.email_template), recipient, cc, subject, body)
 
-        // send email
         val emailIntent = Intent(Intent.ACTION_SENDTO)
         emailIntent.data = Uri.parse(email)
         this.startActivity(emailIntent)
@@ -127,18 +120,19 @@ class DetailActivity : AppCompatActivity(), OnClickListener {
             .subscribe { result ->
                 if (result != null) {
                     displayedIssue = result
-                    setUIDetailsScreen(result)
+                    setUiDetailsScreen(result)
                 }
             }
     }
 
-    private fun setUIDetailsScreen(issue: Issue?) {
-        titleDetailsLabel.text = issue?.title
+    private fun setUiDetailsScreen(issue: Issue?) {
+        titleDetails.text = issue?.title
         if (issue?.picturePreview != null) {
             issuePicture.setImageBitmap(Helper.decodePicturePreview(issue.picturePreview!!))
         }
-        issueDetailDescTextView.text = issue?.description
-        typeFromPredefinedList.text = Helper.getTypeName(issue?.issueType)
+        issueDescription.text = issue?.description
+        typeFromPredefinedList.text = resources.getString(R.string.issue_type, Helper.getTypeName(issue?.issueType) ?: "nepoznat")
+        issueAddress.text = resources.getString(R.string.issue_address, issue?.address ?: "nepoznata")
     }
 
     override fun onBackPressed() {

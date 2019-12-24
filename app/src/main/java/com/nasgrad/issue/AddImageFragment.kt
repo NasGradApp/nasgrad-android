@@ -8,24 +8,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.esafirm.imagepicker.features.ImagePicker
-import com.nasgrad.api.model.Issue
 import com.nasgrad.nasGradApp.R
 import com.nasgrad.utils.Helper
 import kotlinx.android.synthetic.main.create_issue_bottom_navigation_layout.*
 import kotlinx.android.synthetic.main.fragment_add_image.*
-import timber.log.Timber
 import android.graphics.drawable.BitmapDrawable
-import android.graphics.Bitmap
-
-
-
 
 class AddImageFragment : Fragment(), View.OnClickListener {
 
     private lateinit var images: List<com.esafirm.imagepicker.model.Image>
 
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         val view = inflater.inflate(R.layout.fragment_add_image, container, false)
         (activity as CreateIssueActivity).setActionBarTitle(getString(R.string.issue_picture_title))
         return view
@@ -34,7 +31,6 @@ class AddImageFragment : Fragment(), View.OnClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         ibArrowRight.setOnClickListener(this)
-
         ibArrowLeft.visibility = View.GONE
         tvPageIndicator.text = String.format(getString(R.string.create_issue_page_indicator), 1)
     }
@@ -47,13 +43,11 @@ class AddImageFragment : Fragment(), View.OnClickListener {
     }
 
     override fun onClick(view: View) {
-        val viewId = view.id
-        when (viewId) {
+        when (view.id) {
             ibArrowRight.id -> {
                 // update issue
-               var issue = (activity as CreateIssueActivity).issue
+                val issue = (activity as CreateIssueActivity).issue
                 val bitmap = (imagePreview.drawable as BitmapDrawable).bitmap
-                //Timber.d("${Helper.encodePicturePreview(bitmap)}")
                 issue.picturePreview = Helper.encodePicturePreview(bitmap)
                 val fragment = IssueDetailsFragment()
                 (activity as CreateIssueActivity).setFragment(R.id.mainContent, fragment)
@@ -61,7 +55,6 @@ class AddImageFragment : Fragment(), View.OnClickListener {
             openCameraButton.id -> openCameraMode()
             openGalleryButton.id -> openGalleryMode()
             deletePicture.id -> deletePicture()
-
         }
     }
 
@@ -73,7 +66,7 @@ class AddImageFragment : Fragment(), View.OnClickListener {
     }
 
     private fun openCameraMode() {
-        com.esafirm.imagepicker.features.ImagePicker.cameraOnly().start(this)
+        ImagePicker.cameraOnly().start(this)
     }
 
     private fun openGalleryMode() {
@@ -94,5 +87,4 @@ class AddImageFragment : Fragment(), View.OnClickListener {
         openGalleryButton.visibility = View.GONE
         openCameraButton.visibility = View.GONE
     }
-
 }

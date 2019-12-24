@@ -7,7 +7,6 @@ import android.support.v7.widget.LinearLayoutManager
 import com.nasgrad.adapter.IssueAdapter
 import com.nasgrad.adapter.OnItemClickListener
 import com.nasgrad.api.model.Issue
-import com.nasgrad.api.model.Location
 import com.nasgrad.issue.CreateIssueActivity
 import com.nasgrad.nasGradApp.R
 import com.nasgrad.utils.Helper
@@ -23,19 +22,13 @@ class MainActivity : AppCompatActivity(), OnItemClickListener {
     companion object {
         const val ITEM_ID = "ITEM_ID"
     }
-
     private val client by lazy {
         ApiClient.create()
     }
 
     private var disposable: Disposable? = null
 
-    override fun onItemClicked(
-        itemId: String,
-        itemTitle: String?,
-        itemType: String?,
-        itemDecs: String?,
-        imageItem: String?) {
+    override fun onItemClicked(itemId: String, itemTitle: String?, itemType: String?, itemDesc: String?, itemImage: String?) {
 
         val detailsActivityIntent: Intent = Intent(this, DetailActivity::class.java).apply {
             putExtra(ITEM_ID, itemId)
@@ -52,7 +45,6 @@ class MainActivity : AppCompatActivity(), OnItemClickListener {
         fab.setOnClickListener {
             startActivity(Intent(this@MainActivity, CreateIssueActivity::class.java))
         }
-
         createUserId()
         setupAdapter()
         showIssues()
@@ -71,57 +63,15 @@ class MainActivity : AppCompatActivity(), OnItemClickListener {
     private fun setupAdapter() {
         val layoutManager = LinearLayoutManager(this)
         layoutManager.orientation = LinearLayoutManager.VERTICAL
-        rvIssueList.layoutManager = layoutManager
+        issueList.layoutManager = layoutManager
     }
 
     private fun setDataToAdapter(issues: List<Issue>) {
-        rvIssueList.adapter = IssueAdapter(this, issues, this)
+        issueList.adapter = IssueAdapter(this, issues, this)
     }
 
     private fun createUserId() {
         val sharedPreferences = SharedPreferencesHelper(this)
         sharedPreferences.setStringValue(Helper.USER_ID_KEY, Helper.randomGUID())
-    }
-
-    private fun mockedSetDataToAdapter() {
-        rvIssueList.adapter = IssueAdapter(this, mockListOfIssues(), this)
-    }
-
-    private fun mockListOfIssues(): List<Issue> {
-        return listOf(
-            Issue(
-                "001",
-                "123",
-                "naslov",
-                "opis",
-                "tip",
-                mockListOfCategories(),
-                Location("23423", "234234"),
-                "kreiran",
-                resources.getString(R.string.imageBase64),
-                3,
-                "Pavla Papa"
-            ),
-            Issue(
-                "002",
-                "123",
-                "naslov",
-                "opis",
-                "tip",
-                mockListOfCategories(),
-                Location("234234", "23452345"),
-                "kreiran",
-                resources.getString(R.string.imageBase64),
-                2,
-                "Bulevar Oslobodjenja"
-            )
-        )
-    }
-
-    private fun mockListOfCategories(): List<String> {
-        return listOf(
-            "Kategorija1",
-            "Kategorija2"
-        )
     }
 }

@@ -23,18 +23,14 @@ import kotlinx.android.synthetic.main.fragment_preview_issue.*
 import timber.log.Timber
 import java.util.*
 
-
 class PreviewIssueFragment : Fragment(), View.OnClickListener {
 
     private lateinit var issue: Issue
-
     private lateinit var disposable: Disposable
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_preview_issue, container, false)
-
-        (activity as AppCompatActivity).supportActionBar!!.title = getString(R.string.screen_title_issue_summary)
-
+        (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.screen_title_issue_summary)
         return view
     }
 
@@ -47,43 +43,33 @@ class PreviewIssueFragment : Fragment(), View.OnClickListener {
         Timber.d("Issue: $issue")
 
         issue_title.text = issue.title
-        typePreview.text = "Tip problema: ${issue.issueType}"
+        typePreview.text = resources.getString(R.string.issue_type, issue.issueType ?: "nema")
 
-        val categories = issue.categories
         val list = mutableListOf<String>()
-        if (categories != null) {
-            categories.forEach { t: String? ->
-                val name = Helper.getCategoryNameForCategoryId(t)!!
-                list.add(name)
-            }
+        issue.categories?.forEach {
+            val name = Helper.getCategoryNameForCategoryId(it)
+            name?.let { list.add(name) }
         }
 
-        var names = ""
-        list.forEach {
-            names += " " + it
-        }
-
-        categoryPreview.text = "Kategorije: ${names}"
-        addressPreview.text = "Adresa: ${issue.address}"
+        categoryPreview.text = resources.getString(R.string.issue_categories, list.joinToString())
+        addressPreview.text = resources.getString(R.string.issue_address, issue.address)
         descriptionPreview.text = issue.description
 
         Timber.d("${issue.picturePreview}")
-        if (issue.picturePreview != null) imagePreview.setImageBitmap(com.nasgrad.utils.Helper.decodePicturePreview(issue.picturePreview!!))
+        if (issue.picturePreview != null) imagePreview.setImageBitmap(Helper.decodePicturePreview(issue.picturePreview!!))
 
         ibArrowLeft.setOnClickListener(this)
         ibArrowRight.setOnClickListener(this)
-
     }
 
     override fun onClick(view: View) {
-        val viewId = view.id
-        when (viewId) {
+        when (view.id) {
             ibArrowLeft.id -> {
                 (activity as CreateIssueActivity).openPreviousFragment()
             }
             ibArrowRight.id -> {
-                val recipient = "bojanasofronovic@gmail.com"
-                val cc = "sonjamijatovic@gmail.com"
+                val recipient = "sonja.mijatovic@gmail.com"
+                val cc = "sonja.mijatovic@gmail.com"
                 val subject = Uri.encode(String.format(getString(R.string.email_subject), issue.title))
                 val body = Uri.encode(String.format(getString(R.string.email_body), issue.title, issue.id))
                 val email = String.format(getString(R.string.email_template), recipient, cc, subject, body)
@@ -92,7 +78,6 @@ class PreviewIssueFragment : Fragment(), View.OnClickListener {
                 val emailIntent = Intent(Intent.ACTION_SENDTO)
                 emailIntent.data = Uri.parse(email)
                 (activity as CreateIssueActivity).startActivity(emailIntent)
-
                 saveIssue()
             }
         }
@@ -109,11 +94,11 @@ class PreviewIssueFragment : Fragment(), View.OnClickListener {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnNext { t ->
-                    if (t.isSuccessful()) {
+                    if (t.isSuccessful) {
                         val response = t.body()
                         Timber.d("Response: $response")
                     } else {
-                        Timber.e("Error occured")
+                        Timber.e("Error occurred")
                     }
                 }.subscribe()
     }
@@ -122,5 +107,4 @@ class PreviewIssueFragment : Fragment(), View.OnClickListener {
         super.onStop()
         (activity as CreateIssueActivity).finish()
     }
-
 }

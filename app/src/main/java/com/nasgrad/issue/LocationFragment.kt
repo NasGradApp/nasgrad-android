@@ -19,19 +19,19 @@ import kotlinx.android.synthetic.main.fragment_location.*
 import timber.log.Timber
 import java.io.IOException
 
-
-class LocationFragment : Fragment(), OnMapReadyCallback, View.OnClickListener, GoogleMap.OnCameraIdleListener {
+class LocationFragment : Fragment(), OnMapReadyCallback, View.OnClickListener,
+    GoogleMap.OnCameraIdleListener {
 
     private var map: GoogleMap? = null
-
     private lateinit var currentLocation: LatLng
-
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
-
     private lateinit var location: Location
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         return inflater.inflate(R.layout.fragment_location, container, false)
     }
 
@@ -53,7 +53,6 @@ class LocationFragment : Fragment(), OnMapReadyCallback, View.OnClickListener, G
     override fun onMapReady(googleMap: GoogleMap?) {
         this.map = googleMap
         this.map?.setOnCameraIdleListener(this)
-
         getCurrentLocation()
         updateUI()
     }
@@ -63,19 +62,18 @@ class LocationFragment : Fragment(), OnMapReadyCallback, View.OnClickListener, G
         val latLng = map?.cameraPosition?.target!!
         location = Location(latLng.latitude.toString(), latLng.longitude.toString())
 
-        val geocoder = Geocoder((activity as CreateIssueActivity))
-
+        val geoCoder = Geocoder((activity as CreateIssueActivity))
         try {
-            val addressList = geocoder.getFromLocation(latLng.latitude, latLng.longitude, 1)
+            val addressList = geoCoder.getFromLocation(latLng.latitude, latLng.longitude, 1)
             if (addressList != null && addressList.size > 0) {
                 val locality = addressList[0].getAddressLine(0)
                 val country = addressList[0].countryName
-                if (!locality.isEmpty() && !country.isEmpty()) {
-                    tvAddress.text = locality
+                if (locality.isNotEmpty() && country.isNotEmpty()) {
+                    address.text = locality
                     Timber.d("$locality, $country")
                 }
             } else {
-                tvAddress.text = "Nepoznata lokacija"
+                address.text = resources.getString(R.string.unknown_location)
             }
         } catch (e: IOException) {
             e.printStackTrace()
@@ -94,48 +92,46 @@ class LocationFragment : Fragment(), OnMapReadyCallback, View.OnClickListener, G
                                 LatLng(currentLocation.latitude, currentLocation.longitude), 15f
                             )
                         )
-
                     } else {
                         Timber.d("Location is null")
                     }
                 }
             }
         } catch (e: SecurityException) {
-            Timber.e(e, "Exception")
+            Timber.e(e, e.localizedMessage)
         }
     }
 
     private fun updateUI() {
-        if (map == null) {
-            return
-        }
-        try {
-            if ((activity as CreateIssueActivity).permissionGranted) {
-                map?.isMyLocationEnabled = true
-                map?.uiSettings?.isMyLocationButtonEnabled = true
-            } else {
-                map?.isMyLocationEnabled = false
-                map?.uiSettings?.isMyLocationButtonEnabled = false
+        if (map != null) {
+            try {
+                if ((activity as CreateIssueActivity).permissionGranted) {
+                    map?.isMyLocationEnabled = true
+                    map?.uiSettings?.isMyLocationButtonEnabled = true
+                } else {
+                    map?.isMyLocationEnabled = false
+                    map?.uiSettings?.isMyLocationButtonEnabled = false
+                }
+            } catch (e: SecurityException) {
+                Timber.e(e, e.localizedMessage)
             }
-        } catch (e: SecurityException) {
-            Timber.e(e, "Exception")
         }
-
     }
 
     override fun onClick(view: View) {
-        val viewId = view.id
-        when (viewId) {
+        when (view.id) {
             ibArrowLeft.id -> {
-                Timber.d("black click")
                 (activity as CreateIssueActivity).openPreviousFragment()
             }
             ibArrowRight.id -> {
                 // save location
                 val issue = (activity as CreateIssueActivity).issue
                 issue.location = location
-                issue.address = tvAddress.text.toString()
-                (activity as CreateIssueActivity).setFragment(R.id.mainContent, PreviewIssueFragment())
+                issue.address = address.text.toString()
+                (activity as CreateIssueActivity).setFragment(
+                    R.id.mainContent,
+                    PreviewIssueFragment()
+                )
             }
         }
     }
