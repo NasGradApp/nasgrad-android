@@ -28,7 +28,7 @@
     <string name="issue_details_description_input_hint">Opis</string>
 
     <!-- Twitter -->
-    <string name="tweetText">Kreiran je problem u @NasGradApp - %1$s. Slike, lokaciju i opis pogledaj na veb stranici: http://nasgrad.app/issuedetail/%2$s #nasGradApp</string>
+    <string name="tweetText">Kreiran je problem u @NasGradApp - %1$s. Slike, lokaciju i opis pogledaj na veb stranici: https://nasgrad.app/issuedetail/%2$s #nasGradApp</string>
     <string name="tweet_text_type">text/plain</string>
     <string name="twitter_app_package_name">com.twitter.android</string>
     <string name="twitter_app_not_found">Twitter aplikacija nije pronadjena</string>
@@ -40,7 +40,7 @@
     <string name="email_subject">Komunalna prijava (#NasGradApp %1$s)</string>
     <string name="email_body" translatable="false">
         Poštovani,\n\nŽelela / Želeo bih da prijavim sledeći problem - %1$s.\n\nDetalje problema (opis, slike i lokaciju na mapi) možete videti na sledećoj vebsajt stranici:
-        \n\nhttp://nasgrad.app/issuedetail/%2$s.\n\nHvala Vam unapred
+        \n\nhttps://nasgrad.app/issuedetail/%2$s.\n\nHvala Vam unapred
     </string>
     <string name="email_template">mailto:%1$s?cc=%2$s&amp;subject=%3$s&amp;body=%4$s</string>
 
