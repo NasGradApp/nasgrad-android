@@ -4,6 +4,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
+import com.google.android.gms.maps.GoogleMap
+import com.google.android.gms.maps.OnMapReadyCallback
 import com.nasgrad.adapter.IssueAdapter
 import com.nasgrad.adapter.OnItemClickListener
 import com.nasgrad.api.model.Issue
@@ -17,7 +19,7 @@ import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.activity_main.*
 import timber.log.Timber
 
-class MainActivity : AppCompatActivity(), OnItemClickListener {
+class MainActivity : AppCompatActivity(), OnMapReadyCallback, OnItemClickListener {
 
     companion object {
         const val ITEM_ID = "ITEM_ID"
@@ -27,14 +29,7 @@ class MainActivity : AppCompatActivity(), OnItemClickListener {
 //    }
 
     private var disposable: Disposable? = null
-
-    override fun onItemClicked(itemId: String, itemTitle: String?, itemType: String?, itemDesc: String?, itemImage: String?) {
-
-        val detailsActivityIntent: Intent = Intent(this, DetailActivity::class.java).apply {
-            putExtra(ITEM_ID, itemId)
-        }
-        startActivity(detailsActivityIntent)
-    }
+    private var map: GoogleMap? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,8 +41,21 @@ class MainActivity : AppCompatActivity(), OnItemClickListener {
             startActivity(Intent(this@MainActivity, CreateIssueActivity::class.java))
         }
         createUserId()
-        setupAdapter()
+//        setupAdapter()
         showIssues()
+    }
+
+    override fun onMapReady(googleMap: GoogleMap?) {
+        Timber.d("onMapReady")
+        this.map = googleMap
+    }
+
+    override fun onItemClicked(itemId: String, itemTitle: String?, itemType: String?, itemDesc: String?, itemImage: String?) {
+
+        val detailsActivityIntent: Intent = Intent(this, DetailActivity::class.java).apply {
+            putExtra(ITEM_ID, itemId)
+        }
+        startActivity(detailsActivityIntent)
     }
 
     private fun showIssues() {
@@ -60,15 +68,15 @@ class MainActivity : AppCompatActivity(), OnItemClickListener {
 //            }
     }
 
-    private fun setupAdapter() {
-        val layoutManager = LinearLayoutManager(this)
-        layoutManager.orientation = LinearLayoutManager.VERTICAL
-        issueList.layoutManager = layoutManager
-    }
-
-    private fun setDataToAdapter(issues: List<Issue>) {
-        issueList.adapter = IssueAdapter(this, issues, this)
-    }
+//    private fun setupAdapter() {
+//        val layoutManager = LinearLayoutManager(this)
+//        layoutManager.orientation = LinearLayoutManager.VERTICAL
+//        issueList.layoutManager = layoutManager
+//    }
+//
+//    private fun setDataToAdapter(issues: List<Issue>) {
+//        issueList.adapter = IssueAdapter(this, issues, this)
+//    }
 
     private fun createUserId() {
         val sharedPreferences = SharedPreferencesHelper(this)
