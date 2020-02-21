@@ -46,7 +46,6 @@
         tools:text="Oboreno stablo u Laze Teleckog" />
 
     <ScrollView
-        android:id="@+id/scrollViewDetailsActivity"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="8dp"
@@ -57,7 +56,6 @@
         app:layout_constraintTop_toBottomOf="@+id/titleDetails">
 
         <android.support.constraint.ConstraintLayout
-            android:id="@+id/detailsActivityWrapper"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
@@ -121,7 +119,6 @@
                 app:layout_constraintTop_toBottomOf="@+id/issueAddress" />
 
             <ImageButton
-                android:id="@+id/changeToPreviousImage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -136,7 +133,6 @@
                 app:layout_constraintTop_toTopOf="@+id/issuePicture" />
 
             <ImageButton
-                android:id="@+id/changeNextImage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"

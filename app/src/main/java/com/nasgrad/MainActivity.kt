@@ -22,9 +22,9 @@ class MainActivity : AppCompatActivity(), OnItemClickListener {
     companion object {
         const val ITEM_ID = "ITEM_ID"
     }
-    private val client by lazy {
-        ApiClient.create()
-    }
+//    private val client by lazy {
+//        ApiClient.create()
+//    }
 
     private var disposable: Disposable? = null
 
@@ -51,13 +51,13 @@ class MainActivity : AppCompatActivity(), OnItemClickListener {
     }
 
     private fun showIssues() {
-        disposable = client.getAllIssues()
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe { result ->
-                if (result != null)
-                    setDataToAdapter(result)
-            }
+//        disposable = client.getAllIssues()
+//            .subscribeOn(Schedulers.io())
+//            .observeOn(AndroidSchedulers.mainThread())
+//            .subscribe { result ->
+//                if (result != null)
+//                    setDataToAdapter(result)
+//            }
     }
 
     private fun setupAdapter() {

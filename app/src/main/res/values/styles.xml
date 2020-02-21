@@ -8,7 +8,9 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:textColorPrimary">@color/colorTextPrimary</item>
         <item name="android:textColorSecondary">@color/colorTextSecondary</item>
+        <item name="android:fontFamily">@font/roboto_regular</item>
     </style>
+
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
@@ -18,7 +20,7 @@
         <item name="android:textColor">@android:color/white</item>
         <item name="android:homeAsUpIndicator">@drawable/ic_arrow_back</item>
     </style>
-    
+
     <style name="SplashScreenTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowBackground">@drawable/splash_background</item>
     </style>

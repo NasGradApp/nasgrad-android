@@ -34,15 +34,15 @@
         app:layout_constraintTop_toBottomOf="@+id/description" />
 
     <ImageView
-        android:id="@+id/staticMarker"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
+        android:contentDescription="@null"
         app:layout_constraintBottom_toBottomOf="@+id/map"
         app:layout_constraintEnd_toEndOf="@+id/map"
         app:layout_constraintStart_toStartOf="@+id/map"
         app:layout_constraintTop_toTopOf="@+id/map"
-        app:srcCompat="@drawable/ic_location_on_black_24dp" />
+        app:srcCompat="@drawable/ic_location_red" />
 
     <TextView
         android:id="@+id/address"

@@ -3,7 +3,6 @@ package com.nasgrad
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
-import android.util.Log
 import com.nasgrad.api.model.IssueCategory
 import com.nasgrad.api.model.IssueType
 import com.nasgrad.utils.Helper
@@ -29,7 +28,8 @@ class SplashScreenActivity : AppCompatActivity() {
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
-                { result -> saveTypesToSharedPreferences(result)
+                { result ->
+                    saveTypesToSharedPreferences(result)
                     finish()
                 },
                 { finish() }
@@ -39,7 +39,8 @@ class SplashScreenActivity : AppCompatActivity() {
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
-                { result -> saveCategoriesToSharedPreferences(result)
+                { result ->
+                    saveCategoriesToSharedPreferences(result)
                     finish()
                 },
                 { }

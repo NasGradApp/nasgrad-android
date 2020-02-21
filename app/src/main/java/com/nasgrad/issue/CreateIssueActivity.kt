@@ -34,7 +34,7 @@ class CreateIssueActivity : AppCompatActivity(), EasyPermissions.PermissionCallb
         toolbar.setTitleTextColor(ContextCompat.getColor(this, R.color.white))
         supportActionBar?.setHomeAsUpIndicator(ContextCompat.getDrawable(this, R.drawable.ic_arrow_back))
 
-        setFragment(R.id.mainContent, AddImageFragment())
+        setFirstFragment(R.id.mainContent, LocationFragment())
 
         // create initial issue
         val sharedPreferences = SharedPreferencesHelper(this)
@@ -77,13 +77,21 @@ class CreateIssueActivity : AppCompatActivity(), EasyPermissions.PermissionCallb
     }
 
     override fun onPermissionsDenied(requestCode: Int, perms: MutableList<String>) {
-        Timber.d("Permission denied")
+        Timber.e("Permission denied")
     }
 
     override fun onPermissionsGranted(requestCode: Int, perms: MutableList<String>) {
         Timber.d("Permission granted")
     }
 
+
+    private fun setFirstFragment(layoutId: Int, fragment: Fragment) {
+        val transaction = fragmentManager.beginTransaction()
+        transaction.replace(layoutId, fragment)
+        transaction.commit()
+    }
+
+    // used for all fragments except first to allow back navigation by adding to back stack
     fun setFragment(layoutId: Int, fragment: Fragment) {
         val transaction = fragmentManager.beginTransaction()
         transaction.replace(layoutId, fragment)
@@ -95,10 +103,6 @@ class CreateIssueActivity : AppCompatActivity(), EasyPermissions.PermissionCallb
         fragmentManager.popBackStack()
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-    }
-
     fun setActionBarTitle(title: String) {
         supportActionBar?.title = title
     }
@@ -108,5 +112,9 @@ class CreateIssueActivity : AppCompatActivity(), EasyPermissions.PermissionCallb
         supportActionBar?.setDisplayShowHomeEnabled(enable)
     }
 
-}
+    override fun onBackPressed() {
+        super.onBackPressed()
+        fragmentManager.popBackStack()
+    }
 
+}

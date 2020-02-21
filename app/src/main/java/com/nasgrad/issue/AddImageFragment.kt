@@ -13,10 +13,12 @@ import com.nasgrad.utils.Helper
 import kotlinx.android.synthetic.main.create_issue_bottom_navigation_layout.*
 import kotlinx.android.synthetic.main.fragment_add_image.*
 import android.graphics.drawable.BitmapDrawable
+import com.nasgrad.api.model.Issue
 
 class AddImageFragment : Fragment(), View.OnClickListener {
 
     private lateinit var images: List<com.esafirm.imagepicker.model.Image>
+    private lateinit var issue: Issue
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -30,9 +32,19 @@ class AddImageFragment : Fragment(), View.OnClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        ibArrowRight.setOnClickListener(this)
-        ibArrowLeft.visibility = View.GONE
-        tvPageIndicator.text = String.format(getString(R.string.create_issue_page_indicator), 1)
+        issue = (activity as CreateIssueActivity).issue
+        tvPageIndicator.text = String.format(getString(R.string.create_issue_page_indicator), 2)
+
+        previousScreen.setOnClickListener(this)
+        previousScreen.visibility = View.VISIBLE
+
+        nextScreen.setOnClickListener(this)
+        nextScreen.isEnabled = false
+
+        if (issue.picturePreview != null) {
+            imagePreview.setImageBitmap(Helper.decodePicturePreview(issue.picturePreview!!))
+            nextScreen.isEnabled = true
+        }
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -40,22 +52,6 @@ class AddImageFragment : Fragment(), View.OnClickListener {
         openCameraButton.setOnClickListener(this)
         openGalleryButton.setOnClickListener(this)
         deletePicture.setOnClickListener(this)
-    }
-
-    override fun onClick(view: View) {
-        when (view.id) {
-            ibArrowRight.id -> {
-                // update issue
-                val issue = (activity as CreateIssueActivity).issue
-                val bitmap = (imagePreview.drawable as BitmapDrawable).bitmap
-                issue.picturePreview = Helper.encodePicturePreview(bitmap)
-                val fragment = IssueDetailsFragment()
-                (activity as CreateIssueActivity).setFragment(R.id.mainContent, fragment)
-            }
-            openCameraButton.id -> openCameraMode()
-            openGalleryButton.id -> openGalleryMode()
-            deletePicture.id -> deletePicture()
-        }
     }
 
     private fun deletePicture() {
@@ -84,7 +80,23 @@ class AddImageFragment : Fragment(), View.OnClickListener {
     private fun loadImage() {
         imagePreview.setImageBitmap(BitmapFactory.decodeFile(images[0].path))
         deletePicture.visibility = View.VISIBLE
-        openGalleryButton.visibility = View.GONE
-        openCameraButton.visibility = View.GONE
+        nextScreen.isEnabled = true
+    }
+
+    override fun onClick(view: View) {
+        when (view.id) {
+            previousScreen.id -> {
+                (activity as CreateIssueActivity).openPreviousFragment()
+            }
+            nextScreen.id -> {
+                // update issue
+                val bitmap = (imagePreview.drawable as BitmapDrawable).bitmap
+                issue.picturePreview = Helper.encodePicturePreview(bitmap)
+                (activity as CreateIssueActivity).setFragment(R.id.mainContent, IssueDetailsFragment())
+            }
+            openCameraButton.id -> openCameraMode()
+            openGalleryButton.id -> openGalleryMode()
+            deletePicture.id -> deletePicture()
+        }
     }
 }

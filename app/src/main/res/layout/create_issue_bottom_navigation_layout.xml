@@ -6,7 +6,7 @@
     android:layout_height="match_parent">
 
     <ImageButton
-        android:id="@+id/ibArrowLeft"
+        android:id="@+id/previousScreen"
         android:layout_width="56dp"
         android:layout_height="56dp"
         android:layout_marginStart="16dp"
@@ -19,11 +19,11 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_keyboard_arrow_left_black_24dp"
+        app:srcCompat="@drawable/ic_arrow_left"
         tools:ignore="ContentDescription" />
 
     <ImageButton
-        android:id="@+id/ibArrowRight"
+        android:id="@+id/nextScreen"
         android:layout_width="56dp"
         android:layout_height="56dp"
         android:layout_marginTop="16dp"
@@ -35,18 +35,19 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_keyboard_arrow_right_black_24dp"
+        app:srcCompat="@drawable/ic_arrow_right"
         tools:ignore="ContentDescription" />
 
     <TextView
         android:id="@+id/tvPageIndicator"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:enabled="false"
         android:text="@string/create_issue_page_indicator"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/ibArrowRight"
-        app:layout_constraintStart_toEndOf="@+id/ibArrowLeft"
+        app:layout_constraintEnd_toStartOf="@+id/nextScreen"
+        app:layout_constraintStart_toEndOf="@+id/previousScreen"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_goneMarginLeft="56dp" />
 

@@ -18,14 +18,20 @@
         <activity
             android:name="com.nasgrad.SplashScreenActivity"
             android:theme="@style/SplashScreenTheme">
+<!--            <intent-filter>-->
+<!--                <action android:name="android.intent.action.MAIN" />-->
+<!--                <category android:name="android.intent.category.LAUNCHER" />-->
+<!--                <action android:name="android.intent.action.VIEW" />-->
+<!--            </intent-filter>-->
+        </activity>
+
+        <activity android:name="com.nasgrad.MainActivity" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
                 <action android:name="android.intent.action.VIEW" />
             </intent-filter>
         </activity>
-
-        <activity android:name="com.nasgrad.MainActivity" />
 
         <activity
             android:name="com.nasgrad.issue.CreateIssueActivity"

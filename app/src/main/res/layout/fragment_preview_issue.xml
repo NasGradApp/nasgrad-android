@@ -24,7 +24,6 @@
         layout="@layout/create_issue_bottom_navigation_layout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -57,15 +56,15 @@
                 app:srcCompat="@drawable/ic_image" />
 
             <TextView
-                android:id="@+id/typePreview"
+                android:id="@+id/titlePreview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
-                tools:text="Tip problema:"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imagePreview" />
+                app:layout_constraintTop_toBottomOf="@+id/imagePreview"
+                tools:text="Naziv problema:" />
 
             <TextView
                 android:id="@+id/categoryPreview"
@@ -73,10 +72,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
-                tools:text="Kategorije:"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/typePreview" />
+                app:layout_constraintTop_toBottomOf="@+id/titlePreview"
+                tools:text="Kategorija:" />
 
             <TextView
                 android:id="@+id/addressPreview"
@@ -84,10 +83,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="16dp"
-                tools:text="Adresa:"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/categoryPreview" />
+                app:layout_constraintTop_toBottomOf="@+id/categoryPreview"
+                tools:text="Adresa:" />
 
             <TextView
                 android:id="@+id/descriptionPreview"
@@ -105,7 +104,5 @@
                 tools:text="@string/lorem_ipsum_paragraph" />
 
         </android.support.constraint.ConstraintLayout>
-
     </ScrollView>
-
 </android.support.constraint.ConstraintLayout>

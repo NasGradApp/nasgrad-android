@@ -6,12 +6,14 @@ import android.support.v4.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
+import com.nasgrad.api.model.Issue
 import com.nasgrad.api.model.Location
 import com.nasgrad.nasGradApp.R
 import kotlinx.android.synthetic.main.create_issue_bottom_navigation_layout.*
@@ -26,6 +28,7 @@ class LocationFragment : Fragment(), OnMapReadyCallback, View.OnClickListener,
     private lateinit var currentLocation: LatLng
     private lateinit var fusedLocationProviderClient: FusedLocationProviderClient
     private lateinit var location: Location
+    private lateinit var issue: Issue
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -41,19 +44,22 @@ class LocationFragment : Fragment(), OnMapReadyCallback, View.OnClickListener,
         mapFragment.getMapAsync(this)
 
         (activity as CreateIssueActivity).setActionBarTitle(getString(R.string.issue_address_title))
-        ibArrowLeft.visibility = View.VISIBLE
-        tvPageIndicator.text = String.format(getString(R.string.create_issue_page_indicator), 3)
 
-        ibArrowLeft.setOnClickListener(this)
-        ibArrowRight.setOnClickListener(this)
+        tvPageIndicator.text = String.format(getString(R.string.create_issue_page_indicator), 1)
+
+        issue = (activity as CreateIssueActivity).issue
+        address.text = issue.address
+
+        nextScreen.setOnClickListener(this)
 
         fusedLocationProviderClient = FusedLocationProviderClient(activity as CreateIssueActivity)
     }
 
     override fun onMapReady(googleMap: GoogleMap?) {
+        Timber.d("onMapReady")
         this.map = googleMap
         this.map?.setOnCameraIdleListener(this)
-        getCurrentLocation()
+        if (issue.address == null) getCurrentLocation()
         updateUI()
     }
 
@@ -93,7 +99,12 @@ class LocationFragment : Fragment(), OnMapReadyCallback, View.OnClickListener,
                             )
                         )
                     } else {
-                        Timber.d("Location is null")
+                        Timber.e("Location is null")
+                        Toast.makeText(
+                            context,
+                            "Nepoznata lokacija. Pokusajte ponovo.",
+                            Toast.LENGTH_LONG
+                        ).show()
                     }
                 }
             }
@@ -120,18 +131,13 @@ class LocationFragment : Fragment(), OnMapReadyCallback, View.OnClickListener,
 
     override fun onClick(view: View) {
         when (view.id) {
-            ibArrowLeft.id -> {
-                (activity as CreateIssueActivity).openPreviousFragment()
-            }
-            ibArrowRight.id -> {
+            nextScreen.id -> {
                 // save location
                 val issue = (activity as CreateIssueActivity).issue
                 issue.location = location
                 issue.address = address.text.toString()
-                (activity as CreateIssueActivity).setFragment(
-                    R.id.mainContent,
-                    PreviewIssueFragment()
-                )
+
+                (activity as CreateIssueActivity).setFragment(R.id.mainContent, AddImageFragment())
             }
         }
     }
