@@ -6,12 +6,10 @@
 
     <color name="colorTextPrimary">#454F63</color>
     <color name="colorTextSecondary">#7D8492</color>
-    <color name="colorTextLight">#B9BDC4</color>
     <color name="colorTextDisabled">#C1A9EF</color>
 
     <color name="white">#FFFFFF</color>
     <color name="colorBackground">#F9F9FA</color>
-    <color name="editTextBackground">#D9DBDE</color>
     <color name="buttonDisabledBackgroundColor">#EFE9FB</color>
 
 </resources>
