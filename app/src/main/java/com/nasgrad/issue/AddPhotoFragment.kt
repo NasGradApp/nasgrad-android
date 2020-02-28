@@ -11,11 +11,11 @@ import com.esafirm.imagepicker.features.ImagePicker
 import com.nasgrad.nasGradApp.R
 import com.nasgrad.utils.Helper
 import kotlinx.android.synthetic.main.create_issue_bottom_navigation_layout.*
-import kotlinx.android.synthetic.main.fragment_add_image.*
+import kotlinx.android.synthetic.main.fragment_add_photo.*
 import android.graphics.drawable.BitmapDrawable
 import com.nasgrad.api.model.Issue
 
-class AddImageFragment : Fragment(), View.OnClickListener {
+class AddPhotoFragment : Fragment(), View.OnClickListener {
 
     private lateinit var images: List<com.esafirm.imagepicker.model.Image>
     private lateinit var issue: Issue
@@ -25,7 +25,7 @@ class AddImageFragment : Fragment(), View.OnClickListener {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_add_image, container, false)
+        val view = inflater.inflate(R.layout.fragment_add_photo, container, false)
         (activity as CreateIssueActivity).setActionBarTitle(getString(R.string.issue_add_photo_title))
         return view
     }
@@ -39,7 +39,7 @@ class AddImageFragment : Fragment(), View.OnClickListener {
         nextScreen.isEnabled = false
 
         if (issue.picturePreview != null) {
-            imagePreview.setImageBitmap(Helper.decodePicturePreview(issue.picturePreview!!))
+            photoPreview.setImageBitmap(Helper.decodePicturePreview(issue.picturePreview!!))
             nextScreen.isEnabled = true
         }
     }
@@ -52,7 +52,7 @@ class AddImageFragment : Fragment(), View.OnClickListener {
     }
 
     private fun deletePicture() {
-        imagePreview.setImageDrawable(activity?.getDrawable(R.drawable.ic_image))
+        photoPreview.setImageDrawable(activity?.getDrawable(R.drawable.ic_image))
         deletePicture.visibility = View.GONE
         openGalleryButton.visibility = View.VISIBLE
         openCameraButton.visibility = View.VISIBLE
@@ -75,8 +75,8 @@ class AddImageFragment : Fragment(), View.OnClickListener {
     }
 
     private fun loadImage() {
-        imagePreview.setImageBitmap(BitmapFactory.decodeFile(images[0].path))
-        deletePicture.visibility = View.VISIBLE
+        photoPreview.setImageBitmap(BitmapFactory.decodeFile(images[0].path))
+//        deletePicture.visibility = View.VISIBLE
         nextScreen.isEnabled = true
     }
 
@@ -84,7 +84,7 @@ class AddImageFragment : Fragment(), View.OnClickListener {
         when (view.id) {
             nextScreen.id -> {
                 // update issue
-                val bitmap = (imagePreview.drawable as BitmapDrawable).bitmap
+                val bitmap = (photoPreview.drawable as BitmapDrawable).bitmap
                 issue.picturePreview = Helper.encodePicturePreview(bitmap)
                 (activity as CreateIssueActivity).setFragment(R.id.mainContent, DescriptionFragment())
             }

@@ -22,10 +22,7 @@
 
     <style name="Montserrat">
         <item name="android:fontFamily">@font/montserrat_medium</item>
-    </style>
-
-    <style name="Montserrat.Standard">
-        <item name="android:textSize">13sp</item>
+        <item name="android:textSize">14sp</item>
     </style>
 
     <style name="Montserrat.Bold">
@@ -35,26 +32,28 @@
     </style>
 
     <style name="Montserrat.Small">
-        <item name="android:textSize">10sp</item>
+        <item name="android:textSize">12sp</item>
     </style>
 
     <style name="Montserrat.Small.Light">
-        <item name="android:textSize">10sp</item>
         <item name="android:textColor">@color/colorTextSecondary</item>
     </style>
 
     <style name="MontserratSemiBold">
         <item name="android:fontFamily">@font/montserrat_semi_bold</item>
-    </style>
-
-    <style name="MontserratSemiBold.Standard">
-        <item name="android:textSize">13sp</item>
+        <item name="android:textSize">14sp</item>
     </style>
 
     <style name="Base.TextAppearance.AppCompat.Button.Navigation" parent="MontserratSemiBold">
-        <item name="android:textColor">@color/white</item>
+        <item name="android:textColor">@drawable/button_text_selector</item>
         <item name="textAllCaps">true</item>
-        <item name="android:textSize">13sp</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="Base.TextAppearance.AppCompat.Button.Photo" parent="MontserratSemiBold">
+        <item name="android:textColor">@color/colorTextDisabled</item>
+        <item name="textAllCaps">true</item>
+        <item name="android:textSize">12sp</item>
     </style>
 
     <style name="ToolbarStyle">

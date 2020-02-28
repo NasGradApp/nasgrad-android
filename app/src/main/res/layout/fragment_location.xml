@@ -25,7 +25,7 @@
         android:layout_marginTop="10dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        android:background="@drawable/location_background"
+        android:background="@drawable/white_rounded_background"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -47,7 +47,7 @@
             android:layout_marginStart="18dp"
             android:layout_marginBottom="13dp"
             android:background="@color/white"
-            android:textAppearance="@style/MontserratSemiBold.Standard"
+            android:textAppearance="@style/MontserratSemiBold"
             tools:text="Kis Ernea 4" />
     </LinearLayout>
 

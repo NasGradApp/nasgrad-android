@@ -60,7 +60,7 @@ class PreviewIssueFragment : Fragment(), View.OnClickListener {
 
         Timber.d("${issue.picturePreview}")
 
-        if (issue.picturePreview != null) imagePreview.setImageBitmap(
+        if (issue.picturePreview != null) photoPreview.setImageBitmap(
             Helper.decodePicturePreview(
                 issue.picturePreview!!
             )

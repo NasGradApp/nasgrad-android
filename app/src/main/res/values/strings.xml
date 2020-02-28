@@ -12,9 +12,11 @@
 
     <string name="unknown_location">Unnown location</string>
 
-    <!-- Images -->
+    <!-- Photo -->
     <string name="issue_add_photo_title">Add Photo</string>
     <string name="issue_add_photo_explanation">Take photo or use existing photo from your phone</string>
+    <string name="gallery">Gallery</string>
+    <string name="camera">Camera</string>
 
     <!-- Description -->
     <string name="issue_description_title">Description</string>

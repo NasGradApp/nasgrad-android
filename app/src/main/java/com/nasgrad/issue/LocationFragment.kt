@@ -137,7 +137,7 @@ class LocationFragment : Fragment(), OnMapReadyCallback, View.OnClickListener,
                 issue.location = location
                 issue.address = address.text.toString()
 
-                (activity as CreateIssueActivity).setFragment(R.id.mainContent, AddImageFragment())
+                (activity as CreateIssueActivity).setFragment(R.id.mainContent, AddPhotoFragment())
             }
         }
     }

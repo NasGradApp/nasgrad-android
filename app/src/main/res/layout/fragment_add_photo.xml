@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.nasgrad.issue.CreateIssueActivity">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/issue_add_photo_explanation"
+        android:textAppearance="@style/Montserrat.Small"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/photoPreview"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@color/ef_grey"
+        android:contentDescription="@null"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toTopOf="@+id/guideline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+    <Button
+        android:id="@+id/openGalleryButton"
+        android:layout_width="157dp"
+        android:layout_height="68dp"
+        android:layout_marginTop="37dp"
+        android:background="@drawable/white_rounded_background"
+        android:contentDescription="@null"
+        android:elevation="0dp"
+        android:text="@string/gallery"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Button.Photo"
+        app:layout_constraintEnd_toStartOf="@+id/openCameraButton"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/photoPreview" />
+
+    <Button
+        android:id="@+id/openCameraButton"
+        android:layout_width="157dp"
+        android:layout_height="68dp"
+        android:layout_marginTop="37dp"
+        android:background="@drawable/white_rounded_background"
+        android:contentDescription="@null"
+        android:text="@string/camera"
+        android:textAppearance="@style/Base.TextAppearance.AppCompat.Button.Photo"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_chainStyle="spread"
+        app:layout_constraintStart_toEndOf="@+id/openGalleryButton"
+        app:layout_constraintTop_toBottomOf="@+id/photoPreview"
+        app:srcCompat="@drawable/ic_add_a_photo" />
+
+    <ImageButton
+        android:id="@+id/deletePicture"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:contentDescription="@null"
+        android:scaleType="fitXY"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="@+id/photoPreview"
+        app:layout_constraintTop_toTopOf="@+id/photoPreview"
+        app:srcCompat="@drawable/ic_recycler_bin" />
+
+    <include
+        android:id="@+id/include"
+        layout="@layout/create_issue_bottom_navigation_layout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.6"/>
+
+</android.support.constraint.ConstraintLayout>
