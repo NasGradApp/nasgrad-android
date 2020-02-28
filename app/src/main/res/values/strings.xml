@@ -8,14 +8,14 @@
     <!-- Location -->
     <string name="issue_location_title">Choose Location</string>
     <string name="issue_location_explanation">Move the map to pick place where problem is located</string>
+    <string name="issue_location_current">Current Location</string>
 
-    <string name="address_placeholder">Address</string>
     <string name="unknown_location">Unnown location</string>
 
     <!-- Images -->
     <string name="issue_add_photo_title">Add Photo</string>
     <string name="issue_add_photo_explanation">Take photo or use existing photo from your phone</string>
-    
+
     <!-- Description -->
     <string name="issue_description_title">Description</string>
     <string name="issue_description_explanation">Add a title and detailed description of an issue to help us to successfully resolve this issue</string>

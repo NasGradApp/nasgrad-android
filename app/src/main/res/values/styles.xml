@@ -2,11 +2,16 @@
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <!-- Customize your theme here. -->
+        <item name="android:windowLightStatusBar">true</item>
+
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimaryDark">@color/colorBackground</item> <!-- added specifically to set status bar color, if affects anything else find another way-->
+
         <item name="android:textColorPrimary">@color/colorTextPrimary</item>
         <item name="android:textColorSecondary">@color/colorTextSecondary</item>
+
+        <item name="android:background">@color/colorBackground</item>
         <item name="android:fontFamily">@font/montserrat_medium</item>
     </style>
 
@@ -19,7 +24,7 @@
         <item name="android:fontFamily">@font/montserrat_medium</item>
     </style>
 
-    <style name="Montserrat.Medium">
+    <style name="Montserrat.Standard">
         <item name="android:textSize">13sp</item>
     </style>
 
@@ -38,8 +43,15 @@
         <item name="android:textColor">@color/colorTextSecondary</item>
     </style>
 
-    <style name="Base.TextAppearance.AppCompat.Button.Navigation">
+    <style name="MontserratSemiBold">
         <item name="android:fontFamily">@font/montserrat_semi_bold</item>
+    </style>
+
+    <style name="MontserratSemiBold.Standard">
+        <item name="android:textSize">13sp</item>
+    </style>
+
+    <style name="Base.TextAppearance.AppCompat.Button.Navigation" parent="MontserratSemiBold">
         <item name="android:textColor">@color/white</item>
         <item name="textAllCaps">true</item>
         <item name="android:textSize">13sp</item>
