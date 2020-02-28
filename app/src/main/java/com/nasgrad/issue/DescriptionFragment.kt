@@ -13,9 +13,8 @@ import com.nasgrad.api.model.Issue
 import com.nasgrad.nasGradApp.R
 import kotlinx.android.synthetic.main.create_issue_bottom_navigation_layout.*
 import kotlinx.android.synthetic.main.fragment_issue_details.*
-import timber.log.Timber
 
-class IssueDetailsFragment : Fragment(), View.OnClickListener {
+class DescriptionFragment : Fragment(), View.OnClickListener {
 
     private lateinit var issue: Issue
 
@@ -26,8 +25,7 @@ class IssueDetailsFragment : Fragment(), View.OnClickListener {
     ): View? {
         // Inflate the layout for this fragment
         (activity as CreateIssueActivity).supportActionBar?.title =
-            getString(R.string.issue_details_title)
-        (activity as CreateIssueActivity).enableHomeButton(false)
+            getString(R.string.issue_description_title)
         return inflater.inflate(R.layout.fragment_issue_details, container, false)
     }
 
@@ -43,9 +41,6 @@ class IssueDetailsFragment : Fragment(), View.OnClickListener {
         // for ime_action_done to work this has to be set programmatically
         issueDescription.imeOptions = EditorInfo.IME_ACTION_DONE
         issueDescription.setRawInputType(InputType.TYPE_CLASS_TEXT)
-
-        previousScreen.setOnClickListener(this)
-        previousScreen.visibility = View.VISIBLE
 
         nextScreen.isEnabled = false
         nextScreen.setOnClickListener(this)
@@ -68,9 +63,6 @@ class IssueDetailsFragment : Fragment(), View.OnClickListener {
 
     override fun onClick(view: View) {
         when (view.id) {
-            previousScreen.id -> {
-                (activity as CreateIssueActivity).openPreviousFragment()
-            }
             nextScreen.id -> {
                 // update issue
                 issue.title = issueTitle.text.toString()

@@ -4,51 +4,92 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/issueTitleLayout"
+    <TextView
+        android:id="@+id/explanation"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
+        android:text="@string/issue_description_explanation"
+        android:textAppearance="@style/Montserrat.Small"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/title_label"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/title_label"
+        android:textAppearance="@style/Montserrat.Small"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/explanation" />
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/issueTitleLayout"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="0dp"
+        android:layout_height="56dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="6dp"
+        android:layout_marginEnd="16dp"
+        android:textAppearance="@style/Montserrat.Medium"
         app:errorEnabled="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/title_label">
 
         <android.support.design.widget.TextInputEditText
             android:id="@+id/issueTitle"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:hint="@string/issue_details_title_input_hint"
+            android:hint="@string/issue_title_input_hint"
             android:imeOptions="actionNext"
             android:inputType="text"
-            android:maxLength="50"
+            android:maxLength="30"
             android:maxLines="1"
-            android:textSize="16sp" />
+            android:textAppearance="@style/Montserrat.Small.Light" />
     </android.support.design.widget.TextInputLayout>
+
+    <TextView
+        android:id="@+id/title_description"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/title_description"
+        android:textAppearance="@style/Montserrat.Small"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/issueTitleLayout" />
 
     <android.support.design.widget.TextInputLayout
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="150dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="48dp"
+        android:layout_marginTop="6dp"
         android:layout_marginEnd="16dp"
+        android:textAppearance="@style/Montserrat.Medium"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/issueTitleLayout">
+        app:layout_constraintTop_toBottomOf="@+id/title_description">
 
         <android.support.design.widget.TextInputEditText
             android:id="@+id/issueDescription"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="top"
-            android:hint="@string/issue_details_description_input_hint"
+            android:hint="@string/issue_description_input_hint"
             android:inputType="textMultiLine"
-            android:lines="6"
-            android:maxLines="6"
-            android:textSize="16sp" />
+            android:maxLength="200"
+            android:textAppearance="@style/Montserrat.Small.Light" />
     </android.support.design.widget.TextInputLayout>
 
     <include

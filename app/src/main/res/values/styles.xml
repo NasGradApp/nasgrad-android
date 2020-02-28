@@ -4,11 +4,10 @@
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:textColorPrimary">@color/colorTextPrimary</item>
         <item name="android:textColorSecondary">@color/colorTextSecondary</item>
-        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:fontFamily">@font/montserrat_medium</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
@@ -16,8 +15,38 @@
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="HeaderBar">
-        <item name="android:textColor">@android:color/white</item>
+    <style name="Montserrat">
+        <item name="android:fontFamily">@font/montserrat_medium</item>
+    </style>
+
+    <style name="Montserrat.Medium">
+        <item name="android:textSize">13sp</item>
+    </style>
+
+    <style name="Montserrat.Bold">
+        <item name="android:fontFamily">@font/montserrat_bold</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">@color/colorTextPrimary</item>
+    </style>
+
+    <style name="Montserrat.Small">
+        <item name="android:textSize">10sp</item>
+    </style>
+
+    <style name="Montserrat.Small.Light">
+        <item name="android:textSize">10sp</item>
+        <item name="android:textColor">@color/colorTextSecondary</item>
+    </style>
+
+    <style name="Base.TextAppearance.AppCompat.Button.Navigation">
+        <item name="android:fontFamily">@font/montserrat_semi_bold</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="textAllCaps">true</item>
+        <item name="android:textSize">13sp</item>
+    </style>
+
+    <style name="ToolbarStyle">
+        <item name="titleTextAppearance">@style/Montserrat.Bold</item>
         <item name="android:homeAsUpIndicator">@drawable/ic_arrow_back</item>
     </style>
 

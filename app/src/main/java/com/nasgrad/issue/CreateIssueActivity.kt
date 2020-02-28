@@ -30,8 +30,6 @@ class CreateIssueActivity : AppCompatActivity(), EasyPermissions.PermissionCallb
 
         setSupportActionBar(toolbar)
         enableHomeButton(true)
-        setActionBarTitle(getString(R.string.issue_picture_title))
-        toolbar.setTitleTextColor(ContextCompat.getColor(this, R.color.white))
         supportActionBar?.setHomeAsUpIndicator(ContextCompat.getDrawable(this, R.drawable.ic_arrow_back))
 
         setFirstFragment(R.id.mainContent, LocationFragment())

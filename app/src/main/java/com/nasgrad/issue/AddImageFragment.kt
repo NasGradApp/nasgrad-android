@@ -26,7 +26,7 @@ class AddImageFragment : Fragment(), View.OnClickListener {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_add_image, container, false)
-        (activity as CreateIssueActivity).setActionBarTitle(getString(R.string.issue_picture_title))
+        (activity as CreateIssueActivity).setActionBarTitle(getString(R.string.issue_add_photo_title))
         return view
     }
 
@@ -34,9 +34,6 @@ class AddImageFragment : Fragment(), View.OnClickListener {
         super.onViewCreated(view, savedInstanceState)
         issue = (activity as CreateIssueActivity).issue
         tvPageIndicator.text = String.format(getString(R.string.create_issue_page_indicator), 2)
-
-        previousScreen.setOnClickListener(this)
-        previousScreen.visibility = View.VISIBLE
 
         nextScreen.setOnClickListener(this)
         nextScreen.isEnabled = false
@@ -85,14 +82,11 @@ class AddImageFragment : Fragment(), View.OnClickListener {
 
     override fun onClick(view: View) {
         when (view.id) {
-            previousScreen.id -> {
-                (activity as CreateIssueActivity).openPreviousFragment()
-            }
             nextScreen.id -> {
                 // update issue
                 val bitmap = (imagePreview.drawable as BitmapDrawable).bitmap
                 issue.picturePreview = Helper.encodePicturePreview(bitmap)
-                (activity as CreateIssueActivity).setFragment(R.id.mainContent, IssueDetailsFragment())
+                (activity as CreateIssueActivity).setFragment(R.id.mainContent, DescriptionFragment())
             }
             openCameraButton.id -> openCameraMode()
             openGalleryButton.id -> openGalleryMode()

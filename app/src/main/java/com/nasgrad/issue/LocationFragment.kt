@@ -43,7 +43,7 @@ class LocationFragment : Fragment(), OnMapReadyCallback, View.OnClickListener,
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
 
-        (activity as CreateIssueActivity).setActionBarTitle(getString(R.string.issue_address_title))
+        (activity as CreateIssueActivity).setActionBarTitle(getString(R.string.issue_location_title))
 
         tvPageIndicator.text = String.format(getString(R.string.create_issue_page_indicator), 1)
 

@@ -2,18 +2,30 @@
     <string name="app_name">NasGradApp</string>
     <string name="map_api_key">AIzaSyCc8eUyKVRYDY5NISTF8-lavfCdp-y86u0</string>
 
-    <!-- Map -->
-    <string name="unknown_location">Nepoznata lokacija</string>
-    <string name="map_description">Da li je ovo lokacija na kojoj se nalazi problem? \nUkoliko nije, pomerite mapu tako da pin prikazuje tačnu lokaciju problema.</string>
-    <string name="address_placeholder">Adresa</string>
+    <!-- Main -->
+    <string name="next">Next</string>
 
-    <!-- Defaults -->
+    <!-- Location -->
+    <string name="issue_location_title">Choose Location</string>
+    <string name="issue_location_explanation">Move the map to pick place where problem is located</string>
+
+    <string name="address_placeholder">Address</string>
+    <string name="unknown_location">Unnown location</string>
+
+    <!-- Images -->
+    <string name="issue_add_photo_title">Add Photo</string>
+    <string name="issue_add_photo_explanation">Take photo or use existing photo from your phone</string>
+    
+    <!-- Description -->
+    <string name="issue_description_title">Description</string>
+    <string name="issue_description_explanation">Add a title and detailed description of an issue to help us to successfully resolve this issue</string>
+    <string name="title_label">Title</string>
+    <string name="issue_title_input_hint">Type here title for an issue</string>
+    <string name="issue_description_input_hint">Type here description for an issue</string>
+    <string name="title_description">Description</string>
 
     <string name="title_activity_create_issue">CreateIssue</string>
     <string name="create_issue_page_indicator">%1$d/4</string>
-    <string name="issue_picture_title">Slika</string>
-    <string name="issue_details_title">Detalji</string>
-    <string name="issue_address_title">Adresa</string>
 
     <string name="report_issue">Prijavi Problem</string>
     <string name="screen_title_issue_summary">Pregledaj problem</string>
@@ -24,8 +36,7 @@
 
     <string name="lorem_ipsum_paragraph" translatable="false">Sed egestas nunc nec urna rhoncus lobortis. Donec nec aliquet neque. Aliquam et accumsan dolor. Fusce mollis justo eget dapibus ultrices. Cras ut orci tortor. Sed eu odio molestie ante eleifend sollicitudin id ut eros. Cras eget quam nisi.</string>
 
-    <string name="issue_details_title_input_hint">Naslov</string>
-    <string name="issue_details_description_input_hint">Opis</string>
+
 
     <!-- Twitter -->
     <string name="tweetText">Kreiran je problem u @NasGradApp - %1$s. Slike, lokaciju i opis pogledaj na veb stranici: https://nasgrad.app/issuedetail/%2$s #nasGradApp</string>

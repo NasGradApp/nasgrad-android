@@ -31,17 +31,18 @@ class DetailActivity : AppCompatActivity(), OnClickListener {
         setContentView(R.layout.activity_detail)
 
         setSupportActionBar(detailActivityToolbar)
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.setDisplayShowHomeEnabled(true)
-
-        detailActivityToolbar.setTitleTextColor(ContextCompat.getColor(this, R.color.white))
-        supportActionBar?.setHomeAsUpIndicator(ContextCompat.getDrawable(this, R.drawable.ic_arrow_back))
+        enableHomeButton(true)
 
         val itemItemId = intent.getStringExtra(ITEM_ID)
         showDetailIssue(itemItemId)
 
         reportIssue.setOnClickListener(this)
         share_btn.setOnClickListener(this)
+    }
+
+    private fun enableHomeButton(enable: Boolean) {
+        supportActionBar?.setDisplayHomeAsUpEnabled(enable)
+        supportActionBar?.setDisplayShowHomeEnabled(enable)
     }
 
     override fun onClick(view: View) {

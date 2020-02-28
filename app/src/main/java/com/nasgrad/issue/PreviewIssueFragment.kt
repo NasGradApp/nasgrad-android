@@ -41,7 +41,6 @@ class PreviewIssueFragment : Fragment(), View.OnClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        previousScreen.visibility = View.VISIBLE
         tvPageIndicator.text = String.format(getString(R.string.create_issue_page_indicator), 4)
 
         issue = (activity as CreateIssueActivity).issue
@@ -66,18 +65,11 @@ class PreviewIssueFragment : Fragment(), View.OnClickListener {
                 issue.picturePreview!!
             )
         )
-
-        previousScreen.setOnClickListener(this)
-        previousScreen.visibility = View.VISIBLE
-
         nextScreen.setOnClickListener(this)
     }
 
     override fun onClick(view: View) {
         when (view.id) {
-            previousScreen.id -> {
-                (activity as CreateIssueActivity).openPreviousFragment()
-            }
             nextScreen.id -> {
                 val recipient = "sonja.mijatovic@gmail.com"
                 val cc = "sonja.mijatovic@gmail.com"
