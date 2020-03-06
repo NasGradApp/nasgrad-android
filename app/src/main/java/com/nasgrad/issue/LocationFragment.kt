@@ -2,7 +2,7 @@ package com.nasgrad.issue
 
 import android.location.Geocoder
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,15 +13,18 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.MarkerOptions
 import com.nasgrad.api.model.Issue
 import com.nasgrad.api.model.Location
+import com.nasgrad.helpers.bitmapDescriptorFromVector
 import com.nasgrad.nasGradApp.R
 import kotlinx.android.synthetic.main.create_issue_bottom_navigation_layout.*
 import kotlinx.android.synthetic.main.fragment_location.*
 import timber.log.Timber
 import java.io.IOException
 
-class LocationFragment : Fragment(), OnMapReadyCallback, View.OnClickListener,
+class LocationFragment : Fragment(R.layout.fragment_location), OnMapReadyCallback,
+    View.OnClickListener,
     GoogleMap.OnCameraIdleListener {
 
     private var map: GoogleMap? = null
@@ -30,16 +33,9 @@ class LocationFragment : Fragment(), OnMapReadyCallback, View.OnClickListener,
     private lateinit var location: Location
     private lateinit var issue: Issue
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        return inflater.inflate(R.layout.fragment_location, container, false)
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
 

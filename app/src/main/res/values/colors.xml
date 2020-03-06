@@ -12,5 +12,6 @@
     <color name="white">#FFFFFF</color>
     <color name="colorBackground">#F9F9FA</color>
     <color name="buttonDisabledBackgroundColor">#EFE9FB</color>
+    <color name="editTextColor">#B9BDC4</color>
 
 </resources>

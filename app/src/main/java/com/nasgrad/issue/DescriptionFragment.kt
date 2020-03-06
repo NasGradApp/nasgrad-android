@@ -1,7 +1,7 @@
 package com.nasgrad.issue
 
 import android.os.Bundle
-import android.support.v4.app.Fragment
+import androidx.fragment.app.Fragment
 import android.text.Editable
 import android.text.InputType
 import android.text.TextWatcher
@@ -12,7 +12,7 @@ import android.view.inputmethod.EditorInfo
 import com.nasgrad.api.model.Issue
 import com.nasgrad.nasGradApp.R
 import kotlinx.android.synthetic.main.create_issue_bottom_navigation_layout.*
-import kotlinx.android.synthetic.main.fragment_issue_details.*
+import kotlinx.android.synthetic.main.fragment_description.*
 
 class DescriptionFragment : Fragment(), View.OnClickListener {
 
@@ -26,7 +26,7 @@ class DescriptionFragment : Fragment(), View.OnClickListener {
         // Inflate the layout for this fragment
         (activity as CreateIssueActivity).supportActionBar?.title =
             getString(R.string.issue_description_title)
-        return inflater.inflate(R.layout.fragment_issue_details, container, false)
+        return inflater.inflate(R.layout.fragment_description, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

@@ -1,17 +1,15 @@
 package com.nasgrad
 
 import android.content.Intent
-import android.graphics.Bitmap
-import android.graphics.Canvas
 import android.os.Bundle
-import android.support.v4.content.ContextCompat
-import android.support.v7.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.*
 import com.nasgrad.adapter.OnItemClickListener
+import com.nasgrad.helpers.bitmapDescriptorFromVector
 import com.nasgrad.issue.CreateIssueActivity
 import com.nasgrad.nasGradApp.R
 import com.nasgrad.utils.Helper
@@ -39,7 +37,7 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, OnItemClickListene
         setContentView(R.layout.activity_main)
 
         val mapFragment = supportFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
-        mapFragment!!.getMapAsync(this)
+        mapFragment?.getMapAsync(this)
 
         Timber.plant(Timber.DebugTree())
 
@@ -50,25 +48,7 @@ class MainActivity : AppCompatActivity(), OnMapReadyCallback, OnItemClickListene
 //        setupAdapter()
         showIssues()
         marker =
-            MarkerOptions().icon(bitmapDescriptorFromVector(R.drawable.ic_location_pin))
-
-    }
-
-    private fun bitmapDescriptorFromVector(vectorResId: Int): BitmapDescriptor {
-        val vectorDrawable = ContextCompat.getDrawable(this, vectorResId)
-        vectorDrawable?.setBounds(
-            0,
-            0,
-            vectorDrawable.intrinsicWidth,
-            vectorDrawable.intrinsicHeight
-        )
-        val bitmap = Bitmap.createBitmap(
-            vectorDrawable?.intrinsicWidth ?: 0, vectorDrawable?.intrinsicHeight
-                ?: 0, Bitmap.Config.ARGB_8888
-        )
-        val canvas = Canvas(bitmap)
-        vectorDrawable?.draw(canvas)
-        return BitmapDescriptorFactory.fromBitmap(bitmap)
+            MarkerOptions().icon(bitmapDescriptorFromVector(this, R.drawable.ic_location_pin))
     }
 
     override fun onMapReady(googleMap: GoogleMap?) {

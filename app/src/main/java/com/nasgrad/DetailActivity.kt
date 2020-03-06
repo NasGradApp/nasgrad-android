@@ -5,11 +5,10 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Bundle
-import android.support.v4.content.ContextCompat
-import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.view.View.OnClickListener
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.nasgrad.MainActivity.Companion.ITEM_ID
 import com.nasgrad.api.model.Issue
 import com.nasgrad.nasGradApp.R
@@ -48,7 +47,13 @@ class DetailActivity : AppCompatActivity(), OnClickListener {
     override fun onClick(view: View) {
         when (view.id) {
             reportIssue.id -> openEmailClint()
-            share_btn.id -> shareTwitter(resources.getString(R.string.tweetText, displayedIssue.title, displayedIssue.id))
+            share_btn.id -> shareTwitter(
+                resources.getString(
+                    R.string.tweetText,
+                    displayedIssue.title,
+                    displayedIssue.id
+                )
+            )
         }
     }
 
@@ -62,7 +67,8 @@ class DetailActivity : AppCompatActivity(), OnClickListener {
         tweetIntent.putExtra(Intent.EXTRA_TEXT, message)
         tweetIntent.type = resources.getString(R.string.tweet_text_type)
 
-        val resolvedInfoList = packageManager.queryIntentActivities(tweetIntent, PackageManager.MATCH_DEFAULT_ONLY)
+        val resolvedInfoList =
+            packageManager.queryIntentActivities(tweetIntent, PackageManager.MATCH_DEFAULT_ONLY)
 
         var resolved = false
         for (resolveInfo in resolvedInfoList) {
@@ -81,9 +87,14 @@ class DetailActivity : AppCompatActivity(), OnClickListener {
             val intent = Intent()
             intent.putExtra(Intent.EXTRA_TEXT, message)
             intent.action = Intent.ACTION_VIEW
-            intent.data = Uri.parse(resources.getString(R.string.send_tweet_base_url) + urlEncode(message))
+            intent.data =
+                Uri.parse(resources.getString(R.string.send_tweet_base_url) + urlEncode(message))
             startActivity(intent)
-            Toast.makeText(this, resources.getString(R.string.twitter_app_not_found), Toast.LENGTH_LONG).show()
+            Toast.makeText(
+                this,
+                resources.getString(R.string.twitter_app_not_found),
+                Toast.LENGTH_LONG
+            ).show()
         }
     }
 
@@ -105,8 +116,15 @@ class DetailActivity : AppCompatActivity(), OnClickListener {
     private fun openEmailClint() {
         val recipient = resources.getString(R.string.email_address)
         val cc = resources.getString(R.string.nas_grad_email_address)
-        val subject = Uri.encode(String.format(getString(R.string.email_subject), displayedIssue.title))
-        val body = Uri.encode(String.format(getString(R.string.email_body), displayedIssue.title, displayedIssue.id))
+        val subject =
+            Uri.encode(String.format(getString(R.string.email_subject), displayedIssue.title))
+        val body = Uri.encode(
+            String.format(
+                getString(R.string.email_body),
+                displayedIssue.title,
+                displayedIssue.id
+            )
+        )
         val email = String.format(getString(R.string.email_template), recipient, cc, subject, body)
 
         val emailIntent = Intent(Intent.ACTION_SENDTO)
@@ -132,8 +150,12 @@ class DetailActivity : AppCompatActivity(), OnClickListener {
             issuePicture.setImageBitmap(Helper.decodePicturePreview(issue.picturePreview!!))
         }
         issueDescription.text = issue?.description
-        typeFromPredefinedList.text = resources.getString(R.string.issue_type, Helper.getTypeName(issue?.issueType) ?: "nepoznat")
-        issueAddress.text = resources.getString(R.string.issue_address, issue?.address ?: "nepoznata")
+        typeFromPredefinedList.text = resources.getString(
+            R.string.issue_type,
+            Helper.getTypeName(issue?.issueType) ?: "nepoznat"
+        )
+        issueAddress.text =
+            resources.getString(R.string.issue_address, issue?.address ?: "nepoznata")
     }
 
     override fun onBackPressed() {
