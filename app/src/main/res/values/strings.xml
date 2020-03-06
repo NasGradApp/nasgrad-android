@@ -3,6 +3,7 @@
     <string name="map_api_key">AIzaSyCc8eUyKVRYDY5NISTF8-lavfCdp-y86u0</string>
 
     <!-- Main -->
+    <string name="report_an_issue">Report an issue</string>
     <string name="next">Next</string>
 
     <!-- Location -->

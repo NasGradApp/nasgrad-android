@@ -44,7 +44,7 @@
         <item name="android:textSize">14sp</item>
     </style>
 
-    <style name="Base.TextAppearance.AppCompat.Button.Navigation" parent="MontserratSemiBold">
+    <style name="Base.TextAppearance.AppCompat.Button.Action" parent="MontserratSemiBold">
         <item name="android:textColor">@drawable/button_text_selector</item>
         <item name="textAllCaps">true</item>
         <item name="android:textSize">14sp</item>
